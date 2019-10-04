@@ -1,0 +1,47 @@
+{
+  "name": "stackoveerflow-clone",
+  "version": "1.0.0",
+  "description": "Api clone of stackoverflow",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./ -d build --only src --source-maps inline",
+    "prebuild": "rm -rf build/*",
+    "prestart": "npm run build",
+    "start": "DEBUG=http:info node build/src/index.js",
+    "start:dev": "DEBUG=http:info babel-watch src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mcdavid95/stackoveerflow-clone.git"
+  },
+  "author": "Mcdavid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mcdavid95/stackoveerflow-clone/issues"
+  },
+  "homepage": "https://github.com/Mcdavid95/stackoveerflow-clone#readme",
+  "dependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/register": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@hapi/joi": "^16.1.5",
+    "@sendgrid/mail": "^6.4.0",
+    "babel-watch": "^7.0.0",
+    "bcrypt": "^3.0.6",
+    "bunyan": "^1.8.12",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.3",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.1.1"
+  }
+}
