@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 import bunyan from 'bunyan';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
