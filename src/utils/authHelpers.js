@@ -1,8 +1,18 @@
+/* eslint-disable import/no-cycle */
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import DbServices from '../services/dbServices';
+import User from '../models/User';
+import messages from './messages';
+import { handleServerResponseError } from './response';
 
 dotenv.config();
+
+const { getById } = DbServices;
+const {
+  unauthenticated, invalidToken
+} = messages;
 
 /**
  * @function hashPassword
@@ -50,18 +60,23 @@ export const createToken = (id) => {
  * @returns {Object} response object
  */
 export const hasToken = async (req, res, next) => {
-  const token = req.headers['x-access-token'] || req.headers.Authorization;
+  let token = req.headers['x-access-token'] || req.headers.Authorization || req.headers.authorization;
   try {
     if (token) {
+      if (token.startsWith('Bearer ')) {
+        // Remove Bearer from string
+        const [, jwtToken] = token.split(' ');
+        token = jwtToken;
+      }
       const decoded = await jwt.verify(token, process.env.SECRET);
-      const user = await UserService.getUserById(decoded.id);
+      const user = await getById(User, decoded.id);
       if (!user) {
-        return handleServerResponseError(res, 403, 'Token you provided is invalid');
+        return handleServerResponseError(res, 403, invalidToken);
       }
       req.decoded = decoded;
       return next();
     }
-    return handleServerResponseError(res, 403, 'You have to be logged in');
+    return handleServerResponseError(res, 403, unauthenticated);
   } catch (error) {
     return handleServerResponseError(res, 403, error);
   }
