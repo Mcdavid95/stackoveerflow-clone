@@ -16,8 +16,8 @@ const DbServices = {
    * @returns {Promise} Promise resolved or rejected
    * @description get one row by the id been passed to it
    */
-  getById(model, id, options) {
-    return model.findById(id, options);
+  getById(model, id) {
+    return model.findById(id);
   },
 
   /**
@@ -52,17 +52,27 @@ const DbServices = {
    * @description gets all items that fit the criteria and returns rows and count
    */
   getAll(model, options) {
-    return model.findAndCountAll(options);
+    return model.find(options);
   },
 
   /**
    * @param {object} model model /table
    * @param {object} options query options
    * @returns {Promise} Promise resolved or rejected
-   * @description gets all items that fit the criteria and returns rows and count
+   * @description gets count of all items
    */
-  getAllRecord(model, options) {
-    return model.findAll(options);
+  countAllRecord(model) {
+    return model.estimatedDocumentCount();
+  },
+
+  /**
+   * @param {object} model model /table
+   * @param {object} options query options
+   * @returns {Promise} Promise resolved or rejected
+   * @description gets count of all items
+   */
+  countAllRecordWithOptions(model, options) {
+    return model.countDocuments(options);
   },
 
   /**

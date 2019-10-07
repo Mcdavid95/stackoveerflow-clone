@@ -4,7 +4,7 @@ import Joi from '@hapi/joi';
 /** *
  *  Object that help to validate request details
  */
-const JoiValidation = {
+const JoiValidator = {
 
   validateString() {
     return Joi.string();
@@ -68,4 +68,4 @@ const JoiValidation = {
   }
 };
 
-export default JoiValidation;
+export default JoiValidator;
