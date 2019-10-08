@@ -1,28 +1,28 @@
-import Question from '../models/Question';
+import Answer from '../models/Answer';
 import DbServices from '../services/dbServices';
 import { handleServerResponseError, handleServerError } from '../utils/response';
 import messages from '../utils/messages';
 
 const { getById } = DbServices;
 const {
-  questionNotFound
+  answerNotFound
 } = messages;
 
 /**
-   * @method checkQuestionId
+   * @method checkAnswerId
    * @param {object} req request object
    * @param {object} res request object
    * @param {function} next next function
    * @returns {object} custom response
-   * @description checks if questionId passed to params is valid
+   * @description checks if answerId passed to params is valid
    */
-export const checkQuestionId = async (req, res, next) => {
+export const checkAnswerId = async (req, res, next) => {
   try {
-    const { questionId } = req.params;
-    if (questionId) {
-      const question = await getById(Question, questionId);
-      if (!question) {
-        return handleServerResponseError(res, 404, { message: questionNotFound });
+    const { answerId } = req.params;
+    if (answerId) {
+      const answer = await getById(Answer, answerId);
+      if (!answer) {
+        return handleServerResponseError(res, 404, answerNotFound);
       }
       return next();
     }

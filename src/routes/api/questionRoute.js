@@ -39,7 +39,7 @@ const questionRoute = (router) => {
      *            $ref: '#/components/schemas/Question'
      *     responses:
      *       200:
-     *         description: Question created successfully
+     *         description: List of questions fetched successfully
      *       500:
      *         description: Internal Server error
      *     security:
@@ -57,6 +57,15 @@ const questionRoute = (router) => {
        *     description: get all questions
        *     produces:
        *       - application/json
+       *     parameters:
+       *       - in: query
+       *         name: page
+       *         schema:
+       *           type: number
+       *       - in: query
+       *         name: perPage
+       *         schema:
+       *           type: number
        *     responses:
        *       200:
        *         description: Question created successfully

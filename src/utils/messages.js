@@ -5,5 +5,6 @@ export default {
   invalidToken: 'Token you provided is invalid',
   unauthenticated: 'You have to be logged in',
   questionNotFound: 'Question not found',
+  answerNotFound: 'Answer not found',
   serverError: 'Internal server error'
 };
