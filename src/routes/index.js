@@ -2,6 +2,7 @@ import authRoute from './api/authRoute';
 import { handleServerResponse } from '../utils/response';
 import messages from '../utils/messages';
 import questionRoute from './api/questionRoute';
+import answerRoute from './api/answerRoute';
 
 const routes = (router) => {
   router
@@ -41,6 +42,7 @@ const routes = (router) => {
   // auth routes
   authRoute(router);
   questionRoute(router);
+  answerRoute(router);
 };
 
 export default routes;
