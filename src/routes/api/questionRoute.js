@@ -4,7 +4,9 @@ import { createSchema, getOneQuestionSchema, getAllQuestionsSchema } from '../..
 import { hasToken } from '../../utils/authHelpers';
 import { checkQuestionId } from '../../middlewares/questionMiddleware';
 
-const { create, getOneQuestion, getAllQuestions } = questionController;
+const {
+  create, getOneQuestion, getAllQuestions, upvoteQuestion, downvoteQuestion
+} = questionController;
 
 const questionRoute = (router) => {
   router.route('/questions')
@@ -86,6 +88,58 @@ const questionRoute = (router) => {
       */
 
     .get(validate(getOneQuestionSchema), checkQuestionId, getOneQuestion);
+
+  router.route('/questions/:questionId/upvote')
+  /**
+         * @swagger
+         * /api/v1/questions/{questionId}/upvote:
+         *   patch:
+         *     tags:
+         *       - Questions
+         *     description: upvote a question
+         *     produces:
+         *       - application/json
+         *     parameters:
+         *       - in: path
+         *         name: questionId
+         *         schema:
+         *           type: string
+         *     responses:
+         *       200:
+         *         description: Vote details
+         *       500:
+         *         description: Internal Server error
+         *     security:
+         *       - bearerAuth: []
+        */
+
+    .patch(hasToken, validate(getOneQuestionSchema), checkQuestionId, upvoteQuestion);
+
+  router.route('/questions/:questionId/downvote')
+  /**
+           * @swagger
+           * /api/v1/questions/{questionId}/downvote:
+           *   patch:
+           *     tags:
+           *       - Questions
+           *     description: downvote a question
+           *     produces:
+           *       - application/json
+           *     parameters:
+           *       - in: path
+           *         name: questionId
+           *         schema:
+           *           type: string
+           *     responses:
+           *       200:
+           *         description: Vote details
+           *       500:
+           *         description: Internal Server error
+           *     security:
+           *       - bearerAuth: []
+          */
+
+    .patch(hasToken, validate(getOneQuestionSchema), checkQuestionId, downvoteQuestion);
 };
 
 export default questionRoute;

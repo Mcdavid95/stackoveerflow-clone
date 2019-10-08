@@ -58,8 +58,10 @@ const authRoute = (router) => {
        *      properties:
        *        email:
        *          type: string
+       *          example: mc@gmail.com
        *        password:
        *          type: string
+       *          example: jabike_13
        */
 
   /**

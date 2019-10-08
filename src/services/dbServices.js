@@ -32,15 +32,17 @@ const DbServices = {
 
   /**
    * @param {object} model model /table
-   * @param {object} updateInfo columns with values to update
+   * @param {object} query conditions to query
+   * @param {object} updates conditions to query
    * @param {object} options columns with values to update
    * @returns {Promise} Promise resolved or rejected
    * @description updates one row whose details is passed to as argument in options with the
-   * values in updateInfo
+   * values in query
    */
-  update(model, updateInfo, options) {
-    return model.update(
-      updateInfo,
+  update(model, query, updates, options) {
+    return model.findOneAndUpdate(
+      query,
+      updates,
       options
     );
   },
