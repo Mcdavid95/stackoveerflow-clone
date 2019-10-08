@@ -3,6 +3,7 @@ import { handleServerResponse } from '../utils/response';
 import messages from '../utils/messages';
 import questionRoute from './api/questionRoute';
 import answerRoute from './api/answerRoute';
+import searchRoute from './api/searchRoute';
 
 const routes = (router) => {
   router
@@ -43,6 +44,7 @@ const routes = (router) => {
   authRoute(router);
   questionRoute(router);
   answerRoute(router);
+  searchRoute(router);
 };
 
 export default routes;

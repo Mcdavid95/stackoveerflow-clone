@@ -10,6 +10,9 @@ const questionSchema = new Schema({
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });
+questionSchema.index({
+  question: 'text'
+});
 
 const Question = model('Question', questionSchema);
 export default Question;
