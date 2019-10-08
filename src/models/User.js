@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable func-names */
 import { Schema, model } from 'mongoose';
 import dotenv from 'dotenv';
@@ -28,6 +29,11 @@ userSchema.pre('save', async function (next) {
   // override the cleartext password with the hashed one
   user.password = hash;
   next();
+});
+userSchema.index({
+  firstName: 'text',
+  lastName: 'text',
+  email: 'text'
 });
 
 const User = model('User', userSchema);

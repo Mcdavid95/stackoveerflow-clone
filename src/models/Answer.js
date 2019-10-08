@@ -11,6 +11,8 @@ const answerSchema = new Schema({
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });
-
+answerSchema.index({
+  answer: 'text'
+});
 const Answer = model('Answer', answerSchema);
 export default Answer;
