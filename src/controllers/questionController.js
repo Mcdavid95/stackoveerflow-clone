@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
 import dbServices from '../services/dbServices';
 import Question from '../models/Question';
+import Vote from '../models/Vote';
 import {
   handleServerError, handleServerResponse
 } from '../utils/response';
 import { calculateLimitAndOffset, paginate } from '../utils/pagination';
 
 const {
-  create, getById, getAll, countAllRecord
+  create, getById, getAll, countAllRecord, update
 } = dbServices;
 
 mongoose.Promise = global.Promise;
@@ -69,6 +70,24 @@ const questionController = {
         .skip(offset);
       const meta = paginate(page, perPage, questionCount, questions);
       return handleServerResponse(res, 200, { questions, meta });
+    } catch (error) {
+      return handleServerError(res, error);
+    }
+  },
+  async upvoteQuestion(req, res) {
+    const { decoded: { id }, params: { questionId } } = req;
+    try {
+      const vote = await update(Vote, { owner: id, question: questionId }, { vote: 'upvote' }, { new: true, upsert: true });
+      return handleServerResponse(res, 200, { vote });
+    } catch (error) {
+      return handleServerError(res, error);
+    }
+  },
+  async downvoteQuestion(req, res) {
+    const { decoded: { id }, params: { questionId } } = req;
+    try {
+      const vote = await update(Vote, { owner: id, question: questionId }, { vote: 'downvote' }, { new: true, upsert: true });
+      return handleServerResponse(res, 200, { vote });
     } catch (error) {
       return handleServerError(res, error);
     }
