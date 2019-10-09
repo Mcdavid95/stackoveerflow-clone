@@ -31,8 +31,16 @@ Api clone of stackoverflow
 - run `npm install`
 - run `npm start`
 
+### Test
+API test is written with mocha and supertest.
+- clone project on local machine
+- navigate into local repository by running `cd stackoveerflow-clone`
+- create mongodb database
+- create a .env file in root directory and fill it up using example in .env.example
+- run `npm install`
+- run `npm run test`
+
 ### TODO/WIP
-- Unit Testing CI/CD
 - Email Notifications with sendgrid API
 
 ### How to contribute
