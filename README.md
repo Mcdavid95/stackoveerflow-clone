@@ -31,7 +31,7 @@ Api clone of stackoverflow
 - run `npm install`
 - run `npm start`
 
-### Todo 
+### TODO/WIP
 - Unit Testing CI/CD
 - Email Notifications with sendgrid API
 
