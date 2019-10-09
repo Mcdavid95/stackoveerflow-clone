@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import debug from 'debug';
 import helmet from 'helmet';
+import dotenv from 'dotenv';
 import { connect } from 'mongoose';
 import swaggerUi from 'swagger-ui-express';
 import messages from './utils/messages';
@@ -10,12 +11,16 @@ import routes from './routes';
 import swaggerDoc from './config/swaggerDoc';
 import { handleServerResponse, handleServerResponseError } from './utils/response';
 
+dotenv.config();
+
 const app = express();
 const router = express.Router();
 
 const infoLog = debug('http:info');
 
-connect(configDB.url);
+const url = configDB.url;
+
+connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 // Pass router to routes
 routes(router);
 
@@ -46,3 +51,5 @@ const server = app.listen(
   process.env.PORT || 3000,
   () => infoLog(`Listening on port ${server.address().port}`)
 );
+
+export default server;
