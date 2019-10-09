@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./ -d build --only src --source-maps inline",
+    "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "prebuild": "rm -rf build/*",
     "prestart": "npm run build",
     "start": "DEBUG=http:info node build/src/index.js",
     "start:dev": "DEBUG=http:info babel-watch src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha --timeout 35000 --require @babel/register ./tests/** --exit && npm run coverage-report"
   },
   "repository": {
     "type": "git",
@@ -45,8 +46,13 @@
     "swagger-ui-express": "^4.1.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.6",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.1",
+    "nyc": "^14.1.1",
+    "supertest": "^4.0.2"
   }
 }

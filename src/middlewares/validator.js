@@ -17,6 +17,6 @@ export default (schema) => async (req, res, next) => {
     err.details.forEach((e) => {
       errors[e.message.split(' ', 1)[0].replace(/['"]/g, '')] = e.message.replace(/['"]/g, '');
     });
-    return handleServerResponseError(res, 400, errors);
+    return handleServerResponseError(res, 401, errors);
   }
 };
