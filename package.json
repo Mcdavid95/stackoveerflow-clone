@@ -33,7 +33,7 @@
     "@hapi/joi": "^16.1.5",
     "@sendgrid/mail": "^6.4.0",
     "babel-watch": "^7.0.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "bunyan": "^1.8.12",
     "cors": "^2.8.5",
     "debug": "^4.1.1",
